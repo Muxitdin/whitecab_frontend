@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import Service from '../config/service.js'
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { Toast } from "../config/sweetAlert.js"
-
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 export default function SignUp() {
     const dispatch = useDispatch()
@@ -31,9 +31,7 @@ export default function SignUp() {
         e.preventDefault()
         if (newUser.agreement) {
             try {
-                console.log(newUser)
                 const { data } = await Service.createNewUser(newUser)
-                console.log(data)
                 navigate('/prelogin')
                 Toast.fire({
                     icon: 'success',
@@ -46,11 +44,10 @@ export default function SignUp() {
                     title: error?.response?.data?.msg
                 })
             }
-            console.log("Form submitted", newUser)
         } else {
             Toast.fire({
                 icon: 'warning',
-                title: 'Please agree to the terms of the public offer.'
+                title: 'Пожалуйста, согласитесь с условиями публичной оферты'
             })
         }
     }
@@ -61,6 +58,7 @@ export default function SignUp() {
 
     return (
         <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+            <NavLink to={'/'}><IoMdArrowRoundBack className='text-2xl cursor-pointer hover:border hover:scale-125 rounded-lg'/></NavLink>
             <h1 className="text-2xl font-semibold mb-6 text-center">Регистрация</h1>
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">

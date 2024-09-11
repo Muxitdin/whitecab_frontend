@@ -5,6 +5,7 @@ import Service from '../config/service'
 import { useDispatch } from 'react-redux'
 import { authFailure, authStart, authSuccess } from '../redux/slice/authSlice'
 import { Toast } from '../config/sweetAlert'
+import { IoMdArrowRoundBack } from "react-icons/io"
 
 export default function SignIn() {
     const dispatch = useDispatch()
@@ -25,16 +26,13 @@ export default function SignIn() {
             ...prev,
             [e.target.name]: e.target.value
         }))
-        console.log(userData)
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
             dispatch(authStart())
-            console.log(userData)
             const { data } = await Service.loginUser(userData)
-            console.log(data)
             dispatch(authSuccess({ user: data.user, token: data.token }))
             navigate('/profile')
             Toast.fire({
@@ -42,18 +40,18 @@ export default function SignIn() {
                 title: data.msg
             })
         } catch (error) {
-            dispatch(authFailure( error.response?.data?.msg || error.message))
+            dispatch(authFailure(error.response?.data?.msg || error.message))
             console.log(error.response?.data?.msg || error.message)
             Toast.fire({
                 icon: 'warning',
                 title: error.response?.data?.msg
             })
         }
-        console.log("Form submitted", userData)
     }
 
     return (
         <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+            <NavLink to={'/'}><IoMdArrowRoundBack className='text-2xl cursor-pointer hover:border hover:scale-125 rounded-lg' /></NavLink>
             <h1 className="text-2xl font-semibold mb-6 text-center">Вход</h1>
             <form onSubmit={handleSubmit}>
                 <div className="flex flex-col relative mb-4">

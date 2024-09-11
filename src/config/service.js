@@ -15,7 +15,6 @@ const Service = {
         return data
     },
     createNewUser: async (user) => {
-        console.log(user)
         const data = await api.post("/api/auth/register", user)
         return data
     },

@@ -31,6 +31,7 @@ const AuthSlice = createSlice({
         authLogout: (state, action) => {
             state.isLoading = false
             state.isLoggedIn = false
+            state.auth = null
             clearLocalStorage()
         },
     },
@@ -48,7 +49,6 @@ export const getAuthFunction = () => async dispatch => {
     await dispatch(authStart())
     try {
         const { data } = await Service.getAuth()
-        console.log(data)
         await dispatch(authSuccess({user: data.user}))
     } catch (error) {
         console.log(error)
