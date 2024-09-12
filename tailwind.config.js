@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        messiri: ['El Messiri Variable', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }

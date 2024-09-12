@@ -7,7 +7,11 @@ import 'swiper/css/pagination'
 import 'swiper/css'
 import photo1 from '../assets/images/1.jpg'
 import photo2 from '../assets/images/2.jpg'
-import photo3 from '../assets/images/3.jpg'
+import partnerLogo from '../assets/images/partner-logo.png'
+import '@fontsource-variable/el-messiri'
+import s from './styles/home.module.css'
+import { useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 const swiperContainerStyle = {
     width: '100%',
@@ -17,35 +21,47 @@ const swiperContainerStyle = {
 const sliderImages = [
     photo1,
     photo2,
-    photo3
 ]
 
 export default function Home() {
     const [isAtHome, setIsAtHome] = useState(true)
+    const { auth, isLoggedIn } = useSelector(state => state.auth)
 
     return (
         <div className='relative h-full w-full overflow-hidden'>
-            <Navbar isAtHome={isAtHome}/>
+            <Navbar isAtHome={isAtHome} />
             <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
                 spaceBetween={0}
                 slidesPerView={1}
-                navigation={true}
-                pagination={{ clickable: true }}
-                autoplay={{ delay: 5000, disableOnInteraction: false }}
+                loop={true}
+                navigation={false}
+                pagination={false}
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
                 style={swiperContainerStyle}
             >
                 {sliderImages.map((img, index) => (
                     <SwiperSlide key={index}>
-                        <div className="w-full h-screen relative">
+                        <div className="w-full h-[100vh] relative">
                             <img
                                 src={img}
                                 alt={`Slide ${index + 1}`}
-                                className="w-full h-full object-cover "
+                                className="w-full h-full object-cover bg-bottom filter brightness-50"
                             />
                         </div>
                     </SwiperSlide>
                 ))}
+                <div className='z-10 absolute top-0 left-0 w-full h-full flex flex-col items-center justify-start sm:justify-center'>
+                    <div className='mb-10 flex flex-col justify-center items-center sm:w-[330px] h-1/2 rounded-xl text-white font-bold backdrop-blur-[4px]'>
+                        <img src={partnerLogo} className='w-44 sm:w-60 bg-white rounded-xl' alt="#" />
+                        <p className='font-messiri text-2xl sm:text-4xl sm:leading-[4rem] text-center mt-6'>Мы улучшаем<br />качество жизни<br />каждого водителя</p>
+                    </div>
+                    {
+                        !isLoggedIn && !auth ? (
+                            <NavLink to={'/signup'}><button className={s.button_85} role="button">Стать водителем</button></NavLink>
+                        ) : (null)
+                    }
+                </div>
             </Swiper>
         </div>
     )

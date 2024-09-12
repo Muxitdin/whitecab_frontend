@@ -33,6 +33,7 @@ export default function PublicOffer() {
     useEffect(() => {
         const sorted = offersArr.sort((a, b) => new Date(b.date) - new Date(a.date))
         setSortedOffers(sorted)
+        setSelected(sorted[0].pdfUrl)
     }, [])
 
     return (

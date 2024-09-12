@@ -18,6 +18,7 @@ function App() {
         const getUser = async () => {
             try {
                 dispatch(getAuthFunction())
+                console.log("success")
             } catch (error) {
                 console.log(error)
             }
