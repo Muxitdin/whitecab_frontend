@@ -29,7 +29,7 @@ export default function Navbar({ isAtHome }) {
 
                         { isLoggedIn && auth ? (
                             <>
-                                <NavLink to={'/profile'} className='flex text-gray-600 gap-2 cursor-pointer hover:text-black'>
+                                <NavLink to={'/profile'} className='flex items-center text-gray-600 gap-2 cursor-pointer hover:text-black'>
                                     <p>{auth.firstname}</p>
                                     <FaRegUserCircle className='size-6  transition'/>
                                 </NavLink>

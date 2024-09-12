@@ -40,7 +40,10 @@ export default function PublicOffer() {
         <div>
             <Navbar />
             <div className="p-4 flex flex-col sm:flex-row gap-2 ">
-                <div onClick={toggleMenu} className='sm:hidden block'><IoMenu className='text-2xl' /></div>
+                <div className='sm:hidden flex gap-2 w-fit'>
+                    <div onClick={toggleMenu} className='cursor-pointer'><IoMenu className='text-2xl' /></div>
+                    <h3>Меню оферт</h3>
+                </div>
                 <div className={`sm:block ${isMenuOpen ? 'block' : 'hidden'} h-full border border-gray-300 rounded-lg overflow-hidden ${selected ? 'bg-[#323639] text-white' : ''}`}>
                     <ul className="list-none sm:p-4 p-2">
                         {sortedOffers.map((item, index) => (
@@ -48,7 +51,7 @@ export default function PublicOffer() {
                                 <li
                                     onClick={() => handleTakeOne(item.pdfUrl)}
                                     key={index}
-                                    className={`sm:text-lg text-sm font-semibold cursor-pointer p-2 hover:bg-gray-100 rounded transition ease-in-out duration-150 ${selected ? 'hover:text-black' : null}`}
+                                    className={`sm:text-lg text-sm font-semibold cursor-pointer p-2 hover:bg-gray-100 rounded transition ease-in-out duration-150 ${selected === item.pdfUrl ? 'bg-gray-500' : null} ${selected ? 'hover:text-black' : null}`}
                                 >
                                     {item.date}{index === 0 ? <span className={`${selected ? 'hover:text-black' : null}text-gray-300 text-xs`}> актуальная</span> : ''}
                                 </li>
@@ -56,6 +59,7 @@ export default function PublicOffer() {
                         ))}
                     </ul>
                 </div>
+                
                 <div className="sm:h-[calc(100vh-100px)] w-full flex-1 border border-gray-300 rounded-lg overflow-hidden">
                     {selected ? (
                         <iframe

@@ -13,11 +13,8 @@ export default function SignUp() {
         firstname: '',
         lastname: '',
         phonenumber: '',
-        password: '',
         agreement: false,
     })
-
-    const [showPassword, setShowPassword] = useState(false)
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target
@@ -52,10 +49,6 @@ export default function SignUp() {
         }
     }
 
-    const togglePasswordVisibility = () => {
-        setShowPassword((prev) => !prev)
-    }
-
     return (
         <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
             <NavLink to={'/'}><IoMdArrowRoundBack className='text-2xl cursor-pointer hover:border hover:scale-125 rounded-lg'/></NavLink>
@@ -74,7 +67,7 @@ export default function SignUp() {
                     />
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-8">
                     <label className="block text-gray-700 mb-1" htmlFor="lastName">Фамилия</label>
                     <input
                         type="text"
@@ -85,31 +78,6 @@ export default function SignUp() {
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none  focus:ring-blue-200"
                         required
                     />
-                </div>
-
-                <div className="mb-8">
-                    <label className="block text-gray-700 mb-1" htmlFor="password">Пароль</label>
-                    <div className='relative'>
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            id="password"
-                            name="password"
-                            value={newUser.password}
-                            onChange={handleChange}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none  focus:ring-blue-200"
-                            required
-                        />
-                        <span
-                            className="absolute right-3 top-2.5 cursor-pointer text-gray-500"
-                            onClick={togglePasswordVisibility}
-                        >
-                            {showPassword ? (
-                                <FaEyeSlash className="h-5 w-5" />
-                            ) : (
-                                <FaEye className="h-5 w-5" />
-                            )}
-                        </span>
-                    </div>
                 </div>
 
                 <div className="flex flex-col relative mb-4">
@@ -141,7 +109,7 @@ export default function SignUp() {
                         <input
                             type="checkbox"
                             name="agreement"
-                            checked={newUser.agreement} // this is 
+                            checked={newUser.agreement}
                             onChange={handleChange}
                             className="form-checkbox h-5 w-5 text-blue-600"
                         />
