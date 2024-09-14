@@ -23,8 +23,7 @@ const sliderImages = [
     photo2,
 ]
 
-export default function Home() {
-    const [isAtHome, setIsAtHome] = useState(true)
+export default function Home({isAtHome}) {
     const { auth, isLoggedIn } = useSelector(state => state.auth)
 
     return (
@@ -52,15 +51,29 @@ export default function Home() {
                     </SwiperSlide>
                 ))}
                 <div className='z-10 absolute top-0 left-0 w-full h-full flex flex-col items-center justify-start sm:justify-center'>
-                    <div className='mb-10 flex flex-col justify-center items-center sm:w-[330px] h-1/2 rounded-xl text-white font-bold backdrop-blur-[4px]'>
+                    <div className='mb-10 flex flex-col justify-center items-center sm:w-[330px] h-1/2 rounded-xl text-white font-bold'>
                         <img src={partnerLogo} className='w-44 sm:w-60 bg-white rounded-xl' alt="#" />
                         <p className='font-messiri text-2xl sm:text-4xl sm:leading-[4rem] text-center mt-6'>Мы улучшаем<br />качество жизни<br />каждого водителя</p>
                     </div>
                     {
                         !isLoggedIn && !auth ? (
-                            <NavLink to={'/signup'}><button className={s.button_85} role="button">Стать водителем</button></NavLink>
+                            <NavLink to={'/signup'}>
+                                <button className={s.button}>
+                                    <span className={s.button_lg}>
+                                        <span className={s.button_sl}></span>
+                                        <span className={`${s.button_text} font-messiri text-lg`}>Стать водителем</span>
+                                    </span>
+                                </button>
+                            </NavLink>
                         ) : (null)
                     }
+                    <div className="absolute bottom-0 mt-auto mb-4 font-messiri">
+                        <NavLink to={'/contacts'}>
+                            <button className={s.contact}>
+                                Наши контакты
+                            </button>
+                        </NavLink>
+                    </div>
                 </div>
             </Swiper>
         </div>
